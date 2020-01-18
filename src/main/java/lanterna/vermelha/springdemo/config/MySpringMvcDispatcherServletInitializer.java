@@ -1,4 +1,4 @@
-package com.luv2code.springdemo.config;
+package lanterna.vermelha.springdemo.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

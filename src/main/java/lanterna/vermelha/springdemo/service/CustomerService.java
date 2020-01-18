@@ -1,8 +1,8 @@
-package com.luv2code.springdemo.service;
+package lanterna.vermelha.springdemo.service;
 
 import java.util.List;
 
-import com.luv2code.springdemo.entity.Customer;
+import lanterna.vermelha.springdemo.entity.Customer;
 
 public interface CustomerService {
 

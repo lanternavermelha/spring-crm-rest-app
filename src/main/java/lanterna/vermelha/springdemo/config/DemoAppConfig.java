@@ -1,4 +1,4 @@
-package com.luv2code.springdemo.config;
+package lanterna.vermelha.springdemo.config;
 
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -27,7 +27,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("com.luv2code.springdemo")
+@ComponentScan("lanterna.vermelha.springdemo")
 @PropertySource({ "classpath:persistence-mysql.properties" })
 public class DemoAppConfig implements WebMvcConfigurer {
 
@@ -36,8 +36,6 @@ public class DemoAppConfig implements WebMvcConfigurer {
 	
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	// define a bean for ViewResolver
-
 	@Bean
 	public DataSource myDataSource() {
 		
