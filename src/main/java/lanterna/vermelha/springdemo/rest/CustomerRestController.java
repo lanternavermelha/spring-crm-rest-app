@@ -3,6 +3,7 @@ package lanterna.vermelha.springdemo.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,17 +30,19 @@ public class CustomerRestController {
 	}
 
 	//add mapping for GET single customer
-	@GetMapping("/customer/{customerId}")
+	@GetMapping("/customers/{customerId}")
 	public Customer getCustomer(@PathVariable int customerId) {
 
-		if (customerService.getCustomer(customerId) == null) {
+		Customer theCustomer = customerService.getCustomer(customerId);
+		
+		if (theCustomer == null) {
 			throw new CustomerNotFoundException("Customer id not found - " + customerId);
 		}
-		return customerService.getCustomer(customerId);
+		return theCustomer;
 	}
 
 	//add mapping for POST /customer - add new customer
-	@PostMapping("/customer")
+	@PostMapping("/customers")
 	public Customer addCustomer(@RequestBody Customer theCustomer) {
 
 		//if the id is 0 the dao will insert a new customer (instead of update)
@@ -51,7 +54,7 @@ public class CustomerRestController {
 	}
 
 	//add mapping for PUT /customer - update customer
-	@PutMapping("/customer")
+	@PutMapping("/customers")
 	public Customer updateCustomer(@RequestBody Customer theCustomer) {
 
 		customerService.saveCustomer(theCustomer);
@@ -59,6 +62,19 @@ public class CustomerRestController {
 		return theCustomer;
 	}
 
+	//add mapping for DELETE /customers/{customerId} - delete given customer
+	@DeleteMapping("/customers/{customerId}")
+	public String deleteCustomer(@PathVariable int customerId) {
 
+		Customer theCustomer = customerService.getCustomer(customerId);
+		
+		if (theCustomer == null) {
+			throw new CustomerNotFoundException("Customer id not found - " + customerId);
+		}
+		
+		customerService.deleteCustomer(customerId);
+		
+		return "Deleted customer id - " + customerId;
+	}
 
 }
